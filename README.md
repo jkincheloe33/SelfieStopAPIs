@@ -1,12 +1,10 @@
-# Covalence Full Stack Project Boilerplate
-This boilerplate includes build scripts and setup for a ReactJS front-end and an ExpressJS back-end.
+### Back-End for SelfieStop Application
+Written using React Navtive for the front-end, NodeJS for the back-end, and MySQL for the database.
 
 ### Getting Started
 Remember to run `npm install` to install all necessary dependencies.
 
-### Careful!
-Make sure you are always working within the front-end or back-end `src` directory. Stay out of the `dist` and `lib` directories, as their contents will be erased each time the source code is transpiled.
+### About The Application
+Selfie Stop, is a mobile application that allows a user to find cool trendy places to snap the perfect picture. With three different categories to choose from, our app enables you to experience a city like a local.
 
-### Running
-* To run the project during development (for automatic transpile and server restart), use `npm run dev`.
-* `npm run start` will be used in a production environment. It transpiles once and does not look for changes.
+SelfieStop can be used by anyone, but if you sign up for an account, you'll unlock more functionality. When logged in, you'll be able to post images and have access to your profile page. You'll be able to upload a profile picture, write a bio, and have all your images displayed.
