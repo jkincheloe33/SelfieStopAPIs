@@ -2,6 +2,8 @@ import { Router } from 'express';
 import passport from 'passport';
 import { encode } from '../utils/tokens';
 import { generateHash } from '../utils/security';
+import { tokenMiddleware, isLoggedIn } from '../middleware/auth.mw';
+
 import Table from '../table';
 
 let multer = require('multer');
@@ -11,20 +13,22 @@ let users = new Table('users');
 let router = Router();
 
 router.post('/login', (req, res, next) => {
-    passport.authenticate('local', (err, token, info) => {
+    passport.authenticate('local', (err, token, info, user) => {
         console.log(token);
+        console.log("Inside login");
         if (err) {
             console.log(err);
             return res.sendStatus(500);
         } else if (!token) {
             return res.status(401).json(info);
         } else {
+            console.log('Successful login');
             return res.status(201).json(token);
         }
     })(req, res, next);
 });
 
-router.post('/signup', upload.single('image'), (req, res, next) => {
+router.post('/signup', (req, res, next) => {
     generateHash(req.body.password)
         .then((hash) => {
 
@@ -34,7 +38,7 @@ router.post('/signup', upload.single('image'), (req, res, next) => {
                 email: req.body.email,
                 password: hash,
                 bio: req.body.bio,
-                image: req.file.path
+                // image: req.file.path
             }
             users.insert(newUser)
                 .then(() => {
@@ -46,8 +50,5 @@ router.post('/signup', upload.single('image'), (req, res, next) => {
             next(err);
         });
 });
-
-
-
 
 export default router;

@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import peopleRouter from './people';
-import ImagesTestRouter from './imagesTest';
 import AuthRouter from './auth';
 import usersRouter from './users';
+import userProfileRouter from './userProfile';
 import locationsRouter from './locations';
 import imagesRouter from './images';
+import carouselRouter from './carousel';
 import { isLoggedIn, tokenMiddleware } from '../middleware/auth.mw';
 
 let router = Router();
@@ -15,9 +16,10 @@ router.post('*', tokenMiddleware, isLoggedIn);
 router.put('*', tokenMiddleware, isLoggedIn);
 router.delete('*', tokenMiddleware, isLoggedIn);
 
+router.use('/carousel', carouselRouter);
 router.use('/locations', locationsRouter);
-router.use('/imagesTest', ImagesTestRouter);
 router.use('/users', usersRouter);
+router.use('/userProfile', userProfileRouter);
 router.use('/images', imagesRouter);
 router.use('/people', peopleRouter);
 
